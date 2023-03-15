@@ -1,0 +1,23 @@
+# To improve query performance, we strongly suggest adding indexes to any field that you plan to filter or sort by
+# Add the `@index` or `@index(unique: true)` annotation after any non-key field
+# https://academy.subquery.network/build/graphql.html#indexing-by-non-primary-key-field
+
+type Block @entity {
+  id: ID! # A unique ID - The block hash
+  height: Int!
+}
+
+type Transaction @entity {
+  id: ID! # A unique ID - The transaction ID
+  blockHeight: Int!
+  blockTime: Int!
+  sender: Address!
+  receiver: Address
+  amount: BigInt
+}
+
+type Address @entity {
+  id: ID! # in this case the wallet address
+  sentTransactions: [Transaction] @derivedFrom(field: "sender")
+  recievedTransactions: [Transaction] @derivedFrom(field: "receiver")
+}
