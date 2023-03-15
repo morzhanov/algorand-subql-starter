@@ -1,14 +1,5 @@
-import { AlgorandBlock, AlgorandTransaction } from "@subql/types-algorand";
-import { Block, Transaction, Address } from "../types";
-
-export async function handleBlock(block: AlgorandBlock): Promise<void> {
-  // The trigger handler for this function has been commented out in the project manifest (project.yaml)
-  const blockEntity: Block = Block.create({
-    id: block.round.toString(),
-    height: block.round,
-  });
-  await blockEntity.save();
-}
+import { AlgorandTransaction } from "@subql/types-algorand";
+import { Transaction, Address } from "../types";
 
 export async function handleTransaction(
   tx: AlgorandTransaction
