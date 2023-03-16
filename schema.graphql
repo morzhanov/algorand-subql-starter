@@ -3,16 +3,10 @@
 # https://academy.subquery.network/build/graphql.html#indexing-by-non-primary-key-field
 
 type Transaction @entity {
-  id: ID! # A unique ID - The transaction ID
-  blockHeight: Int!
-  blockTime: Int!
-  sender: Address!
-  receiver: Address
+  id: ID!
+  blockNumber: Int!
+  blockTimestamp: Int!
+  from: String!
+  to: String!
   amount: BigInt
-}
-
-type Address @entity {
-  id: ID! # in this case the wallet address
-  sentTransactions: [Transaction] @derivedFrom(field: "sender")
-  recievedTransactions: [Transaction] @derivedFrom(field: "receiver")
 }
